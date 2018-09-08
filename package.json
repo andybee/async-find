@@ -1,0 +1,25 @@
+{
+  "name": "async-find",
+  "version": "1.0.0",
+  "description": "Evaluate an array of asynchronous functions, one by one, until one resolves.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:andybee/async-find.git"
+  },
+  "keywords": [
+    "async",
+    "promises",
+    "sequential",
+    "ordered",
+    "find"
+  ],
+  "author": "Andy Buckingham <andy@andybee.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tap": "^12.0.1"
+  }
+}
