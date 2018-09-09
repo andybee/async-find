@@ -7,7 +7,7 @@ resolves.
 As soon as one resolves, the resolved response is returned and the process halts.
 
 If all functions reject, the function itself rejects with a specific `ExhaustionError`. This can be
-identified by the checking the `code` property on the error object equals `ERR_FUNCTIONS_EXHAUSTED`.
+identified by checking the `code` property on the error object equals `ERR_FUNCTIONS_EXHAUSTED`.
 
 ## Example
 
