@@ -6,6 +6,7 @@ class ExhaustionError extends Error {
   constructor() {
     super('Exhausted all asynchronous functions, none resolved');
     this.code = 'ERR_FUNCTIONS_EXHAUSTED';
+    this.internalErrors = [];
   }
 }
 
@@ -17,9 +18,15 @@ class ExhaustionError extends Error {
  * resolves.
  */
 async function asyncFunctionFind(functions = []) {
+  const exhaustionError = new ExhaustionError();
   return functions
-    .concat(() => { throw new ExhaustionError(); })
-    .reduce((promise, fn) => promise.catch(fn), Promise.reject());
+    .concat(() => { throw exhaustionError; })
+    .reduce((promise, fn) => promise.catch((error) => {
+      if (error !== undefined) {
+        exhaustionError.internalErrors.push(error);
+      }
+      return fn();
+    }), Promise.reject());
 }
 
 module.exports = asyncFunctionFind;
