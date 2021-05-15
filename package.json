@@ -20,6 +20,6 @@
   "author": "Andy Buckingham <andy@andybee.com>",
   "license": "MIT",
   "devDependencies": {
-    "tap": "^12.0.1"
+    "tap": "^15.0.9"
   }
 }
