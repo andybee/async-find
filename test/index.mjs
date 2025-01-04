@@ -1,15 +1,27 @@
-const assert = require('node:assert');
-const test = require('node:test');
+import assert from 'node:assert';
+import test from 'node:test';
 
-const asyncFind = require('../');
+import asyncFind from '../index.mjs';
 
-test('resolves with first resolution', async (t) => {
+test('resolves with first function resolution', async (t) => {
   const result = await asyncFind([
     async () => { throw new Error(); },
     async () => { throw new Error(); },
     async () => 1,
     async () => { throw new Error(); },
     async () => 2,
+  ]);
+
+  assert.equal(result, 1);
+});
+
+test('resolves with first non-function resolution', async (t) => {
+  const result = await asyncFind([
+    async () => { throw new Error(); },
+    async () => { throw new Error(); },
+    1,
+    async () => { throw new Error(); },
+    2,
   ]);
 
   assert.equal(result, 1);

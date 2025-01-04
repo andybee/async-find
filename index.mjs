@@ -1,5 +1,5 @@
 /** Subclass of Error which represents when all functions have been exhausted. */
-class ExhaustionError extends Error {
+export class ExhaustionError extends Error {
   /**
    * Create an error.
    */
@@ -17,16 +17,17 @@ class ExhaustionError extends Error {
  * @param {Promise[]} functions - An array of asynchronous to be evaluated, one by one, until one
  * resolves.
  */
-async function asyncFunctionFind(functions = []) {
+export default async function asyncFind(array) {
   const exhaustionError = new ExhaustionError();
-  return functions
-    .concat(() => { throw exhaustionError; })
-    .reduce((promise, fn) => promise.catch((error) => {
-      if (error !== undefined) {
-        exhaustionError.internalErrors.push(error);
-      }
-      return fn();
-    }), Promise.reject());
+  for (const value of array) {
+    let result;
+    try {
+      result = await (typeof value === 'function' ? value() : value);
+    } catch (error) {
+      exhaustionError.internalErrors.push(error);
+      continue;
+    }
+    return result;
+  }
+  throw exhaustionError;
 }
-
-module.exports = asyncFunctionFind;
