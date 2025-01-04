@@ -4,7 +4,7 @@
   "description": "Evaluate an array of asynchronous functions, one by one, until one resolves.",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,5 @@
     "find"
   ],
   "author": "Andy Buckingham <andy@andybee.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "tap": "^16.0.0"
-  }
+  "license": "MIT"
 }
